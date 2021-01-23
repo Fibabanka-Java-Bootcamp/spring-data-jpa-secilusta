@@ -8,15 +8,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserService {
 
-    private final UserRepo repo;
+    private final UserRepo userRepo;
 
     public UserService(UserRepo repo) {
-        this.repo = repo;
+        this.userRepo = repo;
+    }
+
+    public User findUserByName(String name){
+        return userRepo.findByName(name);
     }
 
     public void userOperations() {
         User u = new User();
-        u.setName("user");
+        u.setName("seciluser");
 
         Address address = new Address();
         address.setStreet("Gazo sokak");
@@ -25,10 +29,8 @@ public class UserService {
 
         u.setAddress(address);
 
-        repo.save(u);
+        userRepo.save(u);
 
-        System.out.println(u.getId());
-
-        System.out.println(repo.findAllByNameContainingIgnoreCase("se"));
+        System.out.println(userRepo.findAllByNameContainingIgnoreCase("se"));
     }
 }
